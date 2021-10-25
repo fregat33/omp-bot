@@ -1,11 +1,12 @@
 package router
 
 import (
+	"github.com/ozonmp/omp-bot/internal/app/commands/estate"
 	"log"
 
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/ozonmp/omp-bot/internal/app/commands/demo"
 	"github.com/ozonmp/omp-bot/internal/app/path"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 type Commander interface {
@@ -37,7 +38,7 @@ type Router struct {
 	// work
 	// service
 	// exchange
-	// estate
+	estate Commander
 	// rating
 	// security
 	// cinema
@@ -72,7 +73,7 @@ func NewRouter(
 		// work
 		// service
 		// exchange
-		// estate
+		estate: estate.NewEventHandler(bot),
 		// rating
 		// security
 		// cinema
@@ -144,6 +145,7 @@ func (c *Router) handleCallback(callback *tgbotapi.CallbackQuery) {
 	case "exchange":
 		break
 	case "estate":
+		c.estate.HandleCallback(callback, callbackPath)
 		break
 	case "rating":
 		break
@@ -215,6 +217,7 @@ func (c *Router) handleMessage(msg *tgbotapi.Message) {
 	case "exchange":
 		break
 	case "estate":
+		c.estate.HandleCommand(msg, commandPath)
 		break
 	case "rating":
 		break

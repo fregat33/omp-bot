@@ -3,9 +3,9 @@ package demo
 import (
 	"log"
 
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/ozonmp/omp-bot/internal/app/commands/demo/subdomain"
 	"github.com/ozonmp/omp-bot/internal/app/path"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 type Commander interface {
